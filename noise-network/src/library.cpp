@@ -4,7 +4,7 @@
 
 int main() {
     hello();
-    return 0;
+return 0;
 }
 
 void hello() {
