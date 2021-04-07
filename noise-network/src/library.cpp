@@ -10,7 +10,6 @@ int main() {
 void hello() {
     std::cout << "Hello, World!" << std::endl;
     int *a;
-    return;
 }
 
 int add(int x, int y) { return x + y; }
