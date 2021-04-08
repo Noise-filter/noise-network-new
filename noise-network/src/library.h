@@ -3,6 +3,6 @@
 
 void hello();
 
-int add(int x, int y);
+// int add(int x, int y);
 
 #endif  // NOISE_NETWORK_NEW_LIBRARY_H

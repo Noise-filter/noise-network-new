@@ -7,9 +7,6 @@ int main() {
     return 0;
 }
 
-void hello() {
-    std::cout << "Hello, World!" << std::endl;
-    int *a;
-}
+void hello() { std::cout << "Hello, World!" << std::endl; }
 
-int add(int x, int y) { return x + y; }
+// int add(int x, int y) { return x + y; }
