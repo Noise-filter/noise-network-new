@@ -18,4 +18,12 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_cmake_run(REQUIRES Catch2/2.6.0@catchorg/stable BASIC_SETUP CMAKE_TARGETS)
 
+include(cmake/StandardProjectSettings.cmake)
+include(cmake/PreventInSourceBuilds.cmake)
+
+# enable cache system
+include(cmake/Cache.cmake)
+
+include(cmake/StaticAnalyzers.cmake)
+
 add_subdirectory(noise-network)
