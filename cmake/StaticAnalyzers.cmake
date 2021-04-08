@@ -12,7 +12,6 @@ if(ENABLE_CPPCHECK)
         --inconclusive
         -i
         ${CMAKE_SOURCE_DIR}/imgui/lib)
-    message("CPPCHECK")
   else()
     message(SEND_ERROR "cppcheck requested but executable not found")
   endif()
@@ -23,7 +22,6 @@ if(ENABLE_CLANG_TIDY)
   if(CLANGTIDY)
     set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY}
                              -extra-arg=-Wno-unknown-warning-option)
-    message("CLANGTIDY")
   else()
     message(SEND_ERROR "clang-tidy requested but executable not found")
   endif()
