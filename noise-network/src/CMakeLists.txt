@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
-add_library(noise_network_new library.cpp library.h)
+set(SOURCES SocketAddressFactory.cpp SocketAddressIPv4.cpp
+            SocketAddressIPv6.cpp)
+
+set(HEADERS SocketAddressFactory.h SocketAddressInterface.h SocketAddressIPv4.h
+            SocketAddressIPv6.h)
+
+add_library(noise_network_new ${SOURCES} ${HEADERS})
 target_compile_features(noise_network_new PRIVATE cxx_std_20)
 
 # Add compiler warnings

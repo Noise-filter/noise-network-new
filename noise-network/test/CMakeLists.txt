@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
+enable_testing()
+
 include_directories(../src/)
 
-set(test_noise_network_sources library_test.h library_test.cpp)
-
-add_executable(test_noise_network_new library_test.cpp)
+add_executable(test_noise_network_new test.cpp)
 target_compile_features(test_noise_network_new PRIVATE cxx_std_20)
 
 # Add compiler warnings
