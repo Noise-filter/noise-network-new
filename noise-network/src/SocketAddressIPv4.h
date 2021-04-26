@@ -17,7 +17,7 @@ class SocketAddressIPv4 : public SocketAddressInterface, public sockaddr_in {
     [[nodiscard]] unsigned short getPort() const override;
 
     // Returns the ip family being used, either AF_INET or AF_INET6
-    [[nodiscard]] short getFamily() const override;
+    [[nodiscard]] unsigned short getFamily() const override;
 
     void setIp(const std::string& ip) override;
     void setPort(unsigned short port) override;
@@ -25,7 +25,6 @@ class SocketAddressIPv4 : public SocketAddressInterface, public sockaddr_in {
     SocketAddressIPv4& operator=(const sockaddr& addr);
     SocketAddressIPv4& operator=(const sockaddr_in& addr);
 
-    operator std::string() override;
     // operator sockaddr();
     // virtual operator LPSOCKADDR();
     // virtual operator LPSOCKADDR_IN();

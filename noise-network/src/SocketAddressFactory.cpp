@@ -23,16 +23,18 @@ auto SocketAddressFactory::Create(const std::string& ip, unsigned short port)
     if (result == 0) {
         // Check what family the ip address corresponds to
         switch (addrResult->ai_family) {
-            case AF_INET:
+            case AF_INET: {
                 sockaddr_in sa;
-                sa = *(sockaddr_in*)(addrResult->ai_addr);
+                sa = *reinterpret_cast<sockaddr_in*>(addrResult->ai_addr);
                 sa.sin_port = htons(port);
                 return std::make_unique<SocketAddressIPv4>(sa);
-            case AF_INET6:
+            }
+            case AF_INET6: {
                 sockaddr_in6 sa6;
-                sa6 = *(sockaddr_in6*)(addrResult->ai_addr);
+                sa6 = *reinterpret_cast<sockaddr_in6*>(addrResult->ai_addr);
                 sa6.sin6_port = htons(port);
                 return std::make_unique<SocketAddressIPv6>(sa6);
+            }
         }
     }
 
@@ -77,14 +79,16 @@ auto SocketAddressFactory::CreateFromSocket(SOCKET socket)
         struct sockaddr_storage addr;
 
         socklen_t len = sizeof(addr);
-        int result = getpeername(socket, (struct sockaddr*)&addr, &len);
+        int result = getpeername(socket, reinterpret_cast<struct sockaddr*>(&addr), &len);
 
         if (result == 0) {
             switch (addr.ss_family) {
                 case AF_INET:
-                    return std::make_unique<SocketAddressIPv4>(*(struct sockaddr_in*)&addr);
+                    return std::make_unique<SocketAddressIPv4>(
+                        *reinterpret_cast<struct sockaddr_in*>(&addr));
                 case AF_INET6:
-                    return std::make_unique<SocketAddressIPv6>(*(struct sockaddr_in6*)&addr);
+                    return std::make_unique<SocketAddressIPv6>(
+                        *reinterpret_cast<struct sockaddr_in6*>(&addr));
                 default:
                     return nullptr;
             }

@@ -20,16 +20,12 @@ class SocketAddressInterface {
     [[nodiscard]] virtual unsigned short getPort() const = 0;
 
     // Returns the ip family being used
-    [[nodiscard]] virtual short getFamily() const = 0;
+    [[nodiscard]] virtual unsigned short getFamily() const = 0;
 
     // Sets the ip address in decimal dotted or hexadecimal format based on which family is used
     // (IPv4 or IPv6)
     virtual void setIp(const std::string& ip) = 0;
     virtual void setPort(unsigned short port) = 0;
-
-    // Returns the ip address in decimal dotted or hexadecimal format based on which family is used
-    // (IPv4 or IPv6)
-    virtual operator std::string() = 0;
 
     // virtual operator sockaddr() = 0;
     // virtual operator LPSOCKADDR() = 0;

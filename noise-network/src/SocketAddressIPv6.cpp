@@ -9,11 +9,11 @@ SocketAddressIPv6::SocketAddressIPv6() {
 }
 
 SocketAddressIPv6::SocketAddressIPv6(const sockaddr& addr) {
-    memcpy((sockaddr_in6*)this, (sockaddr_in6*)&addr, sizeof(sockaddr_in6));
+    memcpy(static_cast<sockaddr_in6*>(this), &addr, sizeof(sockaddr_in6));
 }
 
 SocketAddressIPv6::SocketAddressIPv6(const sockaddr_in6& addr) {
-    memcpy((sockaddr_in6*)this, &addr, sizeof(sockaddr_in6));
+    memcpy(static_cast<sockaddr_in6*>(this), &addr, sizeof(sockaddr_in6));
 }
 
 SocketAddressIPv6::SocketAddressIPv6(const std::string& ip, unsigned short port) {
@@ -22,7 +22,7 @@ SocketAddressIPv6::SocketAddressIPv6(const std::string& ip, unsigned short port)
     inet_pton(AF_INET6, ip.c_str(), &sin6_addr);
 }
 
-short SocketAddressIPv6::getFamily() const { return sin6_family; }
+unsigned short SocketAddressIPv6::getFamily() const { return sin6_family; }
 
 std::string SocketAddressIPv6::getIp() const {
     char str[INET6_ADDRSTRLEN];
@@ -39,16 +39,14 @@ void SocketAddressIPv6::setIp(const std::string& ip) {
 }
 
 SocketAddressIPv6& SocketAddressIPv6::operator=(const sockaddr& addr) {
-    memcpy((sockaddr*)this, &addr, sizeof(sockaddr));
+    memcpy(static_cast<sockaddr_in6*>(this), &addr, sizeof(sockaddr));
     return *this;
 }
 
 SocketAddressIPv6& SocketAddressIPv6::operator=(const sockaddr_in6& addr) {
-    memcpy((sockaddr_in6*)this, &addr, sizeof(sockaddr_in6));
+    memcpy(static_cast<sockaddr_in6*>(this), &addr, sizeof(sockaddr_in6));
     return *this;
 }
-
-SocketAddressIPv6::operator std::string() { return getIp(); }
 
 // SocketAddressIPv6::operator sockaddr() { return *(LPSOCKADDR)(LPSOCKADDR_IN6)this; }
 //

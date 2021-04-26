@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(SOURCES SocketAddressFactory.cpp SocketAddressIPv4.cpp
-            SocketAddressIPv6.cpp)
+            SocketAddressIPv6.cpp WinsockFunctions.cpp)
 
 set(HEADERS SocketAddressFactory.h SocketAddressInterface.h SocketAddressIPv4.h
-            SocketAddressIPv6.h)
+            SocketAddressIPv6.h WinsockFunctions.h)
 
 add_library(noise_network_new ${SOURCES} ${HEADERS})
 target_compile_features(noise_network_new PRIVATE cxx_std_20)
